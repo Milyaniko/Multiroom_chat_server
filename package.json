@@ -1,0 +1,30 @@
+{
+  "name": "multiroom-chat-server",
+  "version": "1.0.0",
+  "description": "Multiroom chat server with social authentication",
+  "main": "server.js",
+  "scripts": {
+    "test": "node node_modules/jest/bin/jest.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milyaniko/Multiroom_chat_server.git"
+  },
+  "author": "Nikolay Milya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Milyaniko/Multiroom_chat_server/issues"
+  },
+  "homepage": "https://github.com/Milyaniko/Multiroom_chat_server#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "jest": "^23.5.0"
+  }
+}
