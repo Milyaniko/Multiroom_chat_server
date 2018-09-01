@@ -1,0 +1,160 @@
+@font-face {
+    font-family: 'Genericons';
+    src: url('../fonts/genericons-regular-webfont.woff')format('woff'),
+    url('../fonts/genericons-regular-webfont.eot')format('truetype');
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+    background-color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    margin: 50px auto;
+    padding: 0 25%;
+    position: relative;
+}
+header h1 {
+    color: #fff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.accordion {
+    background: #333;
+    width: 100%;
+    min-width: 800px;
+    display: block;
+    list-style: none;
+    overflow: hidden;
+    height: 200px;
+    font-size: 0;
+}
+.tab {
+    display: inline-block;
+    background-color: #444;
+    border-right: #333 solid 1px;
+    width: 80px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    transition: all 0.5s;
+}
+.tab:hover {
+    width: 450px;
+}
+.tab:hover .social a:before {
+    margin-left: -100px;
+}
+.tab:hover .social a:after {
+    margin-left: -5px;
+}
+.tab .content {
+    background: white;
+    width: 360px;
+    height: 200px;
+    margin-left: 80px;
+    position: relative;
+    padding: 50px 0 0 15px;
+}
+.tab .content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.tab .content p {
+    font-size: 0.85rem;
+    line-height: 1.4rem;
+    padding-right: 30px;
+}
+.social a:before,
+.social a:after {
+    width: 80px;
+    height: 200px;
+    position: absolute;
+    text-indent: 0;
+    padding-top: 90px;
+    padding-left: 25px;
+    display: block;
+    color: #fff;
+    font: normal 30px Genericons;
+    transition: all 0.5s;
+}
+.social a:after {
+    font-size: 48px;
+    padding-left: 20px;
+    padding-top: 80px;
+    margin-left: 80px;
+}
+
+/*Icons*/
+
+/*Facebook*/
+.facebook a:before,
+.facebook a:after {
+    content: '\f203';
+}
+.facebook a:after {
+    background-color: blue;
+}
+
+/*Instagram*/
+.instagram a:before,
+.instagram a:after {
+    content: '\f215';
+}
+.instagram a:after {
+    background-color: orange;
+}
+
+/*Linkedin*/
+.linkedin a:before,
+.linkedin a:after {
+    content: '\f207';
+}
+.linkedin a:after {
+    background-color: lightskyblue;
+}
+
+/*GitHub*/
+.github a:before,
+.github a:after {
+    content: '\f200';
+}
+.github a:after {
+    background-color: #65e325;
+}
+
+@media(max-width: 950px) {
+    .container {
+        width: 70%;
+    }
+    .tab {
+        display: block;
+        width: 100%;
+        border-bottom: 3px solid #333;
+    }
+    .tab .content {
+        width: 85%;
+    }
+    .tab:hover {
+        width: 100%;
+    }
+    .accordion {
+        display: block;
+        min-width: 450px;
+        height: auto;
+    }
+}
+
+@media(max-width: 680px) {
+    .container {
+        width: 95%;
+    }
+    .accordion {
+        width: 100%;
+        min-width: 305px;
+    }
+}
