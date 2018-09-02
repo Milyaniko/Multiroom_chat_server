@@ -21,8 +21,13 @@
   },
   "homepage": "https://github.com/Milyaniko/Multiroom_chat_server#readme",
   "dependencies": {
+    "connect-mongo": "^2.0.1",
     "ejs": "^2.6.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.2.12",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^5.4.0",

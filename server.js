@@ -1,13 +1,12 @@
 'use strict';
 const express = require('express');
-const app = express();
 const appConfig = require('./app');
+const app = express();
 
 app.use(express.static('public'));
-app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
-
+app.use(appConfig.session);
 app.use('/', appConfig.router);
 
-app.listen(app.get('port'), () => console.log(`An application is running on port ${app.get('port')}...`));
+app.listen(appConfig.port, () => console.log(`An application is running on port ${appConfig.port}...`));
 

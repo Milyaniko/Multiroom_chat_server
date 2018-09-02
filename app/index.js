@@ -1,11 +1,11 @@
 'use strict';
-const router = require('express').Router();
 const routes = require('./routes');
+const session = require('./session');
+const config = require('./config');
 
-router.use('/', (req, res, next) => {
-    res.render('login');
-})
 
 module.exports = {
-    router: router
+    router: routes(),
+    session: session,
+    port: config.port
 }

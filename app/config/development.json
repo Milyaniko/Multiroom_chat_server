@@ -1,0 +1,12 @@
+{
+    "port": 3000,
+    "host": "http://localhost:3000",
+    "dbURI": "__Place the necessary db path here__", 
+    "sessionSecret": "someKindOfKey",
+    "fb": {
+        "clientID": "",
+        "clientSecret": "",
+        "callbackURL": "",
+        "profileFields": ["id", "displayName", "photos"]
+    }
+}
