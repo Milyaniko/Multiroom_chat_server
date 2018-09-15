@@ -54,7 +54,6 @@ const findById = id => new Promise((resolve, reject) => {
     })
 });
 
-
 module.exports = {
     route,
     findUser,
