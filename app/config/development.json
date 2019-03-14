@@ -4,8 +4,8 @@
     "dbURI": "mongodb://localhost:27017/secret_chat", 
     "sessionSecret": "someKindOfKey",
     "fb": {
-        "clientID": "2172108419744814",
-        "clientSecret": "840ab6d15736e4ef709c0cf0e1cb6665",
+        "clientID": "Enter your app ID key here",
+        "clientSecret": "Enter your app secret key here",
         "callbackURL": "//localhost:3000/auth/facebook/callback",
         "profileFields": ["id", "displayName", "photos"]
     }
