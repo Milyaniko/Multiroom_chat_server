@@ -29,14 +29,14 @@ const route = (routes) => {
 };
 
 // Find a user by key
-const findUser = profileID => db.userModel.findOne({
-    "profileID": profileID
+const findUser = profileId => db.userModel.findOne({
+    "profileId": profileId
 });
 
 // Create a new user and return it's instance
-const createUser = profile => new Promise((respond, reject) => {
+const createUser = profile => new Promise((resolve, reject) => {
     const newUser = db.userModel({
-        profileID: profile.id,
+        profileId: profile.id,
         fullName: profile.displayName,
         profilePicture: profile.photos[0].value || ""
     });

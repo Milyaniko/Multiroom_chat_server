@@ -10,13 +10,12 @@ db.on('error', error => console.log("MongoDB error: ", error));
 db.once('open', () => console.log('The connection has been established'));
 
 const userSchema = new mongoose.Schema({
-    profileID: String,
+    profileId: String,
     fullName: String,
     profilePicture: String
 });
 
 const userModel = mongoose.model('user', userSchema);
-
 module.exports = {
     mongoose,
     userModel

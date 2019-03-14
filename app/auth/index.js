@@ -5,11 +5,11 @@ const helpers = require('../helpers');
 const facebookStrategy = require('passport-facebook').Strategy;
 
 module.exports = () => {
-    passport.serializerUser((user, done) => {
+    passport.serializeUser((user, done) => {
         done(null, user.id);
     });
 
-    passport.deserealizeUser((id, done) => {
+    passport.deserializeUser((id, done) => {
         helpers.findById(id)
         .then(user => done(null, user))
         .catch(error => console.log(`Deserealizing of a user failded: ${error}`));
