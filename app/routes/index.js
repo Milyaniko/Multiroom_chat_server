@@ -1,6 +1,6 @@
 'use strict';
 
-const helpers = require('../helpers');
+const { route } = require('../helpers');
 const passport = require('passport');
 
 module.exports = () => {
@@ -17,10 +17,14 @@ module.exports = () => {
             '/auth/facebook/callback': passport.authenticate('facebook', {
                 'successRedirect': '/rooms',
                 'failureRedirect': '/',
-            })
+            }),
+            '/logout': (req, res, next) => {
+                req.logout();
+                res.redirect('/');
+            }
         },
         'post': {},
         'NA': (req, res, next) => res.status(404).render(process.cwd() + '/views/404.ejs')
     }
-    return helpers.route(routes)
+    return route(routes)
 }
