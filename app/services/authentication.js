@@ -24,7 +24,6 @@ class Authentication {
 }
     // Find a user by key
     findUser(profileId) {
-        console.log('findUser');
         return db.userModel.findOne({
             "profileId": profileId
         });
@@ -35,8 +34,8 @@ class Authentication {
          db.userModel.findById(id, (error, user) => {
             if(error) reject(error);
             else resolve(user);
-        })
-    });
+            })
+        });
     };
 };
 
