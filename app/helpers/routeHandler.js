@@ -21,12 +21,7 @@ const _routeHandler = (routes, method) => {
     }
 };
 
-// Pass the routes to the handler
-const route = (routes) => {
+module.exports = (routes) => {
     _routeHandler(routes);
     return router;
 };
-
-module.exports = {
-    route,
-}
