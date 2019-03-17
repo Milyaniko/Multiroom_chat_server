@@ -8,6 +8,7 @@ const { socketIO } = require('./services');
 module.exports = {
     router: routes(),
     port: config.port,
+    redisConfig: config.redis,
     auth: auth(),
     socketIO,
     session,
