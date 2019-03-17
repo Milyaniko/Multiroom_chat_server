@@ -1,12 +1,13 @@
 'use strict';
 const config = require('../config');
 const mongoose = require('mongoose');
+const { logger }= require('../services')
 const db = mongoose.connection;
 const options = {
     useNewUrlParser: true,
 };
 mongoose.connect(config.dbURI, options);
-db.on('error', error => console.log("MongoDB error: ", error));
+db.on('error', error => logger.log('error', 'Mongoose connection error: ' + error));
 db.once('open', () => console.log('The connection has been established'));
 
 const userSchema = new mongoose.Schema({
