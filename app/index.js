@@ -3,7 +3,7 @@ const routes = require('./routes');
 const session = require('./session');
 const config = require('./config');
 const auth = require('./auth');
-const { socketIO } = require('./services');
+const { socketIO, logger } = require('./services');
 
 module.exports = {
     router: routes(),
@@ -12,4 +12,5 @@ module.exports = {
     auth: auth(),
     socketIO,
     session,
+    logger,
 }

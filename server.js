@@ -3,7 +3,8 @@ const express = require('express');
 const passport = require('passport');
 const redis = require('redis').createClient;
 const adapter = require('socket.io-redis');
-const { router, socketIO, session, port, redisConfig } = require('./app');
+const morgan = require('morgan');
+const { router, socketIO, session, port, redisConfig, logger } = require('./app');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -22,6 +23,11 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(router);
+app.use(morgan('combined', {
+    stream: {
+        write: message => logger.log('info', message),
+    }
+}));
 io.use((socket, next) => session(socket.request, {}, next));
 io.set('transports', ['websocket']);
 io.adapter(adapter({
@@ -32,6 +38,6 @@ socketIO(io, app);
 
 server.listen(port, () => {
     socketIO(io, app);
-    console.log(`An application is running on port ${port}...`);
+    logger.log('info', `An application is running on port ${port}...`);
 }); 
 
