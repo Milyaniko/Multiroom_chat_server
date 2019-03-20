@@ -1,8 +1,8 @@
 'use strict';
-const isRoomRegistered = require('./isRoomRegistered');
+const { findRoomByName } = require('./index');
 
 module.exports = (allRooms, data, socket) => {
-    const registeredRoom = isRoomRegistered(allRooms, data.roomName);
+    const registeredRoom = findRoomByName(allRooms, data.roomName);
     if (registeredRoom) {
        const userID =  socket.request.session.passport.user;
        const isUserRegistered = registeredRoom.users.some(user => user.userID === userID);

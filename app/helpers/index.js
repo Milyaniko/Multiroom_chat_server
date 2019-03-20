@@ -2,14 +2,15 @@
 
 const route = require('./routeHandler');
 const randomHex = require('./randomHex');
-const isRoomRegistered = require('./isRoomRegistered');
+const findRoomByName = require('./findRoomByName');
+const findRoomById = require('./findRoomById');
 const addUserToRoom = require('./addUserToRoom');
 const removeUserFromRoom = require('./removeUserFromRoom');
 
 module.exports = {
     route,
     randomHex,
-    isRoomRegistered,
+    findRoomByName,
     addUserToRoom,
     removeUserFromRoom,
 };
