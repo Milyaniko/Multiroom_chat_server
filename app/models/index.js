@@ -1,6 +1,10 @@
 'use strict'
-const chatRoomModel = require('./chatRoom');
+const ChatRoom = require('./chatRoom');
+const User = require('./userModel');
+const Message = require('./messageModel');
 
 module.exports = {
-    chatRoomModel,
+    ChatRoom,
+    Message,
+    User,
 };
