@@ -34,7 +34,6 @@ io.adapter(adapter({
     pubClient,
     subClient
 }));
-socketIO(io, app);
 
 server.listen(port, () => {
     socketIO(io, app);

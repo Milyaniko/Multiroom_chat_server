@@ -1,5 +1,5 @@
 'use strict';
-const db = require('../db');
+
 const { User } = require('../models');
 
 class Authentication {

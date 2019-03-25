@@ -13,4 +13,5 @@ module.exports = {
     findRoomByName,
     addUserToRoom,
     removeUserFromRoom,
+    findRoomById,
 };

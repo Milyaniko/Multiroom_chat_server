@@ -14,7 +14,7 @@ module.exports = (allRooms, data, socket) => {
            socketID: socket.id,
            userID,
            userName: data.userName,
-           userPicture: data.userPicture,
+           userAvatar: data.userAvatar,
        });
        socket.join(data.roomID);
        return registeredRoom;
