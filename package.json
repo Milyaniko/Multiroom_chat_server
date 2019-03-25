@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "node node_modules/jest/bin/jest.js",
-    "start": "node server.js"
+    "start-all": "concurrently --kill-others \"start-redis\" \"start-dev\"",
+    "start-redis": "redis-server",
+    "start-dev": "node server.js"
   },
   "engines": {
     "node": "8.9.1"
@@ -37,6 +39,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "eslint": "^5.4.0",
     "jest": "^23.5.0"
   }
