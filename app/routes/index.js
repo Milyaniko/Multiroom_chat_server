@@ -1,15 +1,33 @@
 'use strict';
 
-const { route } = require('../helpers');
+const { route, findRoomById } = require('../helpers');
+const { authentication } = require('../services');
+const {  ChatRoom, Message, User } = require('../models');
+const config = require('../config');
 const passport = require('passport');
 
 module.exports = () => {
     const routes = {
         'get': {
             '/': (req, res, next) => res.render('login'),
-            '/rooms': (req, res, next) => res.render('rooms', { user: req.user }),
-            '/chat': (req, res, next) => res.render('chatRoom'),
-            '/logout': (req, res, next) => {
+            '/rooms': [authentication.isAuthenticated, (req, res) => res.render('rooms', { 
+                        user: req.user, 
+                        host: config.host
+                     })],
+            '/chat/:id':[authentication.isAuthenticated, (req, res, next) => {
+                const registeredRoom = findRoomById(req.app.locals.chatrooms, req.params.id)
+                if (!registeredRoom) {
+                    next();
+                } else {
+                    res.render('chatRoom', {
+                        user: req.user,
+                        host: config.host,
+                        roomName: registeredRoom.roomName,
+                        roomID: registeredRoom.roomID,
+                    });
+                }
+            }],
+            '/logout': (req, res) => {
                 req.logout(); 
                 res.redirect('/');
             },
@@ -24,7 +42,7 @@ module.exports = () => {
             }
         },
         'post': {},
-        'NA': (req, res, next) => res.status(404).render(process.cwd() + '/views/404.ejs')
+        'NA': (req, res, next) => res.status(404).render('404'),
     }
     return route(routes)
 }
