@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ChatCat - Rooms</title>
-	<link rel="stylesheet" href="./css/roomsStyles.css">
-	<script src="/js/jquery-2.1.4.min.js"></script>
+	<link rel="stylesheet" href="css/roomsStyles.css">
+	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -12,22 +12,48 @@
 			<h1>ChatCAT | Select or Create a Chatroom</h1>
 		</div>
 		<div class="controls">
-			<div class="userPicHolder"><img src="./img/user.jpg" alt="John Doe"></div>
-			<p class="userName">John Doe</p>
-			<a href="login.htm" id="logOutBtn">Logout</a>
+			<div class="userPicHolder"><img src="<%= user.profilePicture %>"></div>
+			<p class="userName"><%= user.fullName %></p>
+			<a href="/logout" id="logOutBtn">Logout</a>
 		</div>
-		<div class="controls">
-			<input type="text" name="roomName" placeholder="Create a new Chatroom">
+		<div class="controls">	
+			<input type="text" name="roomName" id="roomName" placeholder="Create a new Chatroom">
 			<a href="#" id="createBtn">Create</a>
 		</div>
 		<div class="roomsListDiv">
 			<ul class="roomsList" id="roomsListUL">
 			<!-- Loop list items here -->
-				<a href="chatroom.htm"><li>World Cuisine</li></a>
-				<a href="chatroom.htm"><li>Coffee and Conversations</li></a>
 			<!-- Loop ends -->
 			</ul>
 		</div>
 	</div>
+	<script>
+			'use strict'
+			const socket = io.connect('<%= host %>' + '/roomslist', {
+				transports: ['websocket']
+			});
+			const newRoom = document.getElementById("roomName");
+			const createRoomBtn = document.getElementById('createBtn');
+			const roomsListDiv = document.getElementById('roomsListUL');
+			const createNewRoom = (event) => {
+				if (newRoom.value != '') {
+					socket.emit('createNewRoom', newRoom.value);
+					newRoom.value = '';
+				}
+			};
+			const renderChatRooms = (chatRooms) => {
+				let listStr = '';
+				for (let chat of chatRooms) {
+					listStr += `<a href="/chat/${chat.roomID}"><li>${chat.roomName}</li></a>`;
+				}
+				roomsListDiv.innerHTML = "";
+				roomsListDiv.innerHTML = listStr;
+			}
+			createRoomBtn.addEventListener('click', createNewRoom);
+			socket.emit('getChatRooms');
+			socket.on('chatRoomsList', allRooms => {
+				renderChatRooms(JSON.parse(allRooms));	
+			}); 
+		</script>
 </body>
 </html>
