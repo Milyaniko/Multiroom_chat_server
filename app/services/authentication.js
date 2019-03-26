@@ -12,9 +12,9 @@ class Authentication {
     createUser(profile) { 
         return new Promise((resolve, reject) => {
             const newUser = new User({
-                profileId: profile.id,
-                fullName: profile.displayName,
-                profilePicture: profile.photos[0].value || ""
+                userId: profile.id,
+                userName: profile.displayName,
+                userAvatar: profile.photos[0].value || ""
             });
             newUser.save(error => {
                 if(error) reject(error);
@@ -23,9 +23,9 @@ class Authentication {
     });
 }
     // Find a user by key
-    findUser(profileId) {
+    findUser(userId) {
         return User.findOne({
-            "profileId": profileId
+            "userId": userId
         });
     };
     // Find a user by ID from session

@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = (rooms, roomName) => rooms.filter(room => room.roomName === roomName);
+module.exports = (rooms, roomName) => rooms.find(room => room.roomName === roomName);
