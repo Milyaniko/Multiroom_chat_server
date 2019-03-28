@@ -1,5 +1,5 @@
 .container {
-	position:absolute;
+	position: relative;
     width: 960px;
     height: 687px;
 	border:1px solid black;
@@ -125,7 +125,6 @@
 
 .chatMessagesPanel {
 	position: absolute;
-	/* background:red; */
 	height: 566px;
 	width: 692px;
 	border-right: 1px dashed black;
@@ -143,7 +142,6 @@
 
 .chatMessages {
 	position: relative;
-	/* background-color: red; */
 	border-bottom: 1px dashed;
 	width: 692px;
 	height: 490px;
@@ -154,17 +152,24 @@
 
 .typePanel {
 	position: relative;
-	width:692px;
+	width: 692px;
 	height: 75px;
 	background-color: #FFFFFF;
 }
 
+#userTypingContainer {
+	position: relative;
+	height: 17px;
+	padding: 10px 0px 0px 10px;
+	color: black;
+}
+
 input[name='userInput'] {
-	position:absolute;
-	padding: 24px;
+	position: relative;
+	padding: 10px;
 	font-size: 22px;
 	width: 537px;
-	height: 23px;
+	/* height: 10px; */
 	top: 0px;
 	outline: 0px;
 	left: 0px;

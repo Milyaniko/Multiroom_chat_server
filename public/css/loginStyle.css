@@ -17,6 +17,10 @@ body {
     padding: 0 25%;
     position: relative;
 }
+.disabled {
+    opacity: 0.5;
+    cursor: not-alowed;
+}
 header h1 {
     color: #fff;
     margin-bottom: 10px;
