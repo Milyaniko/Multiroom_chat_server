@@ -12,7 +12,7 @@ const { logger } = require('../services');
 module.exports = (io, app) => {
     app.locals.chatrooms = [];
     app.locals.messages = [];
-    app.locals.typingUsers = [];
+    app.locals.typingUsers = {};
     const allRooms = app.locals.chatrooms;
     const typingUsers = app.locals.typingUsers;
     const messages = app.locals.messages;
@@ -91,11 +91,13 @@ module.exports = (io, app) => {
         });
         socket.on('startType', (userName, roomID) => {
             typingUsers[userName] = roomID;
-            io.emit('userTypingUpdate', JSON.stringify(typingUsers), roomID);
+            socket.emit('userTypingUpdate', typingUsers, roomID );
+            socket.broadcast.emit('userTypingUpdate', typingUsers, roomID);
         });
         socket.on('stopType', (userName) => {
             delete typingUsers[userName];
-            io.emit('userTypingUpdate', JSON.stringify(typingUsers));
+            socket.emit('userTypingUpdate', typingUsers);
+            socket.broadcast.emit('userTypingUpdate', typingUsers);
         });
     });
 };

@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="../css/chatroomStyles.css">
 	<script src="https://widget.cloudinary.com/global/all.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="../app//helpers//typingUserParser.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -29,6 +30,7 @@
 				<!-- loop end -->
 				</div>
 				<div class="typePanel">
+					<div id="userTypingContainer"></div>
 					<input type="text" name="userInput" id="userInput" placeholder="Type here and press enter">
 					<a href="#" id="uploadFile" class="fileUploadBtn">Photo</a>
 				</div>
@@ -54,6 +56,7 @@
 			const userInputField = document.getElementById('userInput');
 			const uploadImageBtn = document.getElementById('uploadFile');
 			const chatMessagesList = document.getElementById('chatMessages');
+			const userTypingContainer = document.getElementById('userTypingContainer');
 			socket.on('connect', () => {
 				socket.emit('join', {
 					roomID,
@@ -63,7 +66,12 @@
 			});
 			const userInputPress = (event) => {
 				let inputValue = event.target.value;
-				event.preventDefault();;
+				if (inputValue !== '') {
+					socket.emit('startType', userName, roomID);
+				} else {
+					socket.emit('stopType', userName);
+				}
+				event.preventDefault();
 				if (event.which === 13 && inputValue !== '') {
 					const newMessage = {
 						roomID,
@@ -74,6 +82,8 @@
 					socket.emit('newMessage', JSON.stringify(newMessage));
 					updateMessagesList(userAvatar, inputValue);
 					inputValue = '';
+					userInputField.value = '';
+					socket.emit('stopType', userName);
 				}
 			};
 			const uploadImagePress = (event) => {
@@ -95,8 +105,8 @@
 						};
 						socket.emit('newMessage', newMessage);
 					} else {
-							console.log(error)
-						}
+						console.log(error)
+					}
 				})
 			};
 			const renderUserItem = (user) => (
@@ -132,7 +142,27 @@
 				const parsedData = JSON.parse(messages);
 				parsedData.filter(message => message.roomID === roomID)
 				.map(item => updateMessagesList(item.userAvatar, item.message));
-			})
+			});
+			socket.on('userTypingUpdate', (typingUsers, typingRoomID) => {
+				let names = '';
+				let numberOfTypers = 0;
+				let verb = numberOfTypers > 1 ? 'are' : 'is';
+				if (Object.keys(typingUsers).length > 0) {
+					for (let user in typingUsers) {
+					if (typingUsers[user] === roomID) {
+						if (names === '') {
+                        	names = user
+                    	} else {
+                        	names = `${names}, ${user}`;
+                    	}
+                    numberOfTypers += 1
+					}
+				}
+				userTypingContainer.innerHTML = `${names} ${verb} typing a message...`;
+				} else {
+					userTypingContainer.innerHTML = '';
+				}
+			});
 		</script>
 </body>
 </html>
