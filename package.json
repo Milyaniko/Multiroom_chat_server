@@ -7,7 +7,7 @@
     "test": "node node_modules/jest/bin/jest.js",
     "start-all": "concurrently --kill-others \"start-redis\" \"start-dev\"",
     "start-redis": "redis-server",
-    "start-dev": "node server.js"
+    "start-dev": "nodemon server.js"
   },
   "engines": {
     "node": "8.9.1"
@@ -41,6 +41,7 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "eslint": "^5.4.0",
-    "jest": "^23.5.0"
+    "jest": "^23.5.0",
+    "nodemon": "^1.18.10"
   }
 }
