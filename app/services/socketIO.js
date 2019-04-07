@@ -3,7 +3,6 @@ const { ChatRoom, Message } = require('../models');
 const { 
     randomHex,
     findRoomByName,
-    findRoomById,
     addUserToRoom,
     removeUserFromRoom, 
 } = require('../helpers')
